@@ -38,7 +38,7 @@ Case #37: 3
 Case #38: 5
 Case #39: 6
 Case #40: 6
-Case #41: 7
+Case #41: 6
 Case #42: 8
 Case #43: 5
 Case #44: 4
@@ -47,14 +47,14 @@ Case #46: 5
 Case #47: 5
 Case #48: 4
 Case #49: 5
-Case #50: 7
+Case #50: 6
 Case #51: 7
 Case #52: 7
 Case #53: 7
 Case #54: 3
 Case #55: 5
 Case #56: 6
-Case #57: 6
+Case #57: 5
 Case #58: 4
 Case #59: 8
 Case #60: 7
@@ -90,7 +90,7 @@ Case #89: 8
 Case #90: 6
 Case #91: 3
 Case #92: 5
-Case #93: 8
+Case #93: 7
 Case #94: 7
 Case #95: 7
 Case #96: 6

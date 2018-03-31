@@ -8,7 +8,7 @@ public class InfiniteHouseOfPancakes{
 	}
 
 	public InfiniteHouseOfPancakes(){
-		String data[] = ReadFile("B-small-practice.in");
+		String data[] = ReadFile("B-large-practice.in");
 		/*Scanner miScanner = new Scanner(System.in);
 		System.out.print("Number of Cases: ");
 		int tests = Integer.parseInt(miScanner.nextLine());*/
@@ -20,22 +20,13 @@ public class InfiniteHouseOfPancakes{
 			String[] arrayString = data[index].split(" ");
 			//System.out.print(arraysize+" "+data[index]);
 			index++;
-			test(i+1,arraysize,arrayString);
+			test2(i+1,arraysize,arrayString);
 		}
 		/*String[] arr = new String[]{"9"};
 		test(0,1,arr);*/
 	}
 
 	public void test(int caseNumber, int arraysize, String[] arrayString){
-		/*Scanner miScanner2 = new Scanner(System.in);
-
-		System.out.print("Number of non-empty plates: ");
-		int arraysize = Integer.parseInt(miScanner2.nextLine());
-
-		System.out.print("Number pankaces per person: ");
-		String input = miScanner2.nextLine();
-		String[] arrayString = input.split(" ");*/
-
 
 		ArrayList<Integer> array = new ArrayList<Integer>();
 		for(String s : arrayString){
@@ -170,37 +161,27 @@ public class InfiniteHouseOfPancakes{
 	}
 
 
+	public void test2(int caseNumber, int arraysize, String[] arrayString){
+            int[] ps = new int[arraysize];
+            for (int i = 0; i < arraysize; i++)
+                ps[i] = Integer.parseInt(arrayString[i]);
 
-
-	//Code that actually works but i dont know why
-	/*public void test2(){
-		Scanner input = new Scanner(System.in);
-        int numCases = input.nextInt();
-        for (int n = 0; n < numCases; n++)
-        {
-            int N = input.nextInt();
-            int[] ps = new int[N];
-            for (int i = 0; i < N; i++)
-                ps[i] = input.nextInt();
-
-            int[] counts = new int[10];
+            int[] posibilities = new int[1001];
             for (int p : ps)
-                counts[p]++;
+                posibilities[p]++;
 
             int min = 10000;
-            for (int lim = 1; lim <= counts.length; lim++)
+            for (int i = 1; i <= posibilities.length; i++)
             {
                 int moves = 0;
-                for (int i = 0; i < counts.length; i++){
-                    moves += ((i - 1) / lim) * counts[i];
-                    System.out.println("Moves ( ("+i+"-1)/"+lim+" ) *"+counts[i]+"="+((i - 1) / lim) * counts[i]);
+                for (int j = 0; j < posibilities.length; j++){
+                    moves += ((j - 1) / i) * posibilities[j];
                 }
-                if (moves + lim < min){
-                    min = moves + lim;
-                    System.out.println("Min "+min);
+                if (moves + i < min){
+                    min = moves + i;
+                    //System.out.println("Min "+min);
                 }
             }
-            System.out.printf("Case #%d: %d\n", n + 1, min);
-        }
-	}*/
+            System.out.println("Case #"+caseNumber+": " + min);
+	}
 }
