@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import java.io.PrintWriter;
 public class InfiniteHouseOfPancakes{
 	int minutes = 0;
 
@@ -8,24 +9,42 @@ public class InfiniteHouseOfPancakes{
 	}
 
 	public InfiniteHouseOfPancakes(){
-		String data[] = ReadFile("B-large-practice.in");
-		/*Scanner miScanner = new Scanner(System.in);
-		System.out.print("Number of Cases: ");
-		int tests = Integer.parseInt(miScanner.nextLine());*/
+		WriteFile("small-output.txt",outputString("B-small-practice.in"));
+		WriteFile("large-output.txt",outputString("B-large-practice.in"));
+		
+	}
+
+	public ArrayList<String> outputString(String file){
+		String data[] = ReadFile(file);
 		int tests = Integer.parseInt(data[0]);
 		int index = 1;
+		ArrayList<String> outputString = new ArrayList<String>();
 		for(int i=0; i<tests; i++){
 			int arraysize = Integer.parseInt(data[index]);
 			index++;
 			String[] arrayString = data[index].split(" ");
-			//System.out.print(arraysize+" "+data[index]);
 			index++;
-			test2(i+1,arraysize,arrayString);
+			outputString.add(test2(i+1,arraysize,arrayString));
 		}
-		/*String[] arr = new String[]{"9"};
-		test(0,1,arr);*/
+
+		return outputString;
 	}
 
+	public void WriteFile(String name, ArrayList<String> outputString){
+		try{
+			PrintWriter out = new PrintWriter(new File(name));
+			for(String s:outputString){
+				//System.out.println(s);
+				out.write(s);
+				out.println();
+			}
+			out.close();
+		}catch(FileNotFoundException e){}
+	}
+
+
+
+	//The test method solve some of the cases but not all of them
 	public void test(int caseNumber, int arraysize, String[] arrayString){
 
 		ArrayList<Integer> array = new ArrayList<Integer>();
@@ -160,28 +179,25 @@ public class InfiniteHouseOfPancakes{
         return fileString.split(",");
 	}
 
+	//test2 does solve all of the cases. It tries every posibility, and returns the minimum value
+	public String test2(int caseNumber, int arraysize, String[] arrayString){
 
-	public void test2(int caseNumber, int arraysize, String[] arrayString){
-            int[] ps = new int[arraysize];
+			//List of pancakes
+            int[] input = new int[arraysize];
             for (int i = 0; i < arraysize; i++)
-                ps[i] = Integer.parseInt(arrayString[i]);
+                input[i] = Integer.parseInt(arrayString[i]);
 
-            int[] posibilities = new int[1001];
-            for (int p : ps)
-                posibilities[p]++;
-
-            int min = 10000;
-            for (int i = 1; i <= posibilities.length; i++)
-            {
+            int best = 1000;
+            for (int time = 1; time < 1000; time++) {
                 int moves = 0;
-                for (int j = 0; j < posibilities.length; j++){
-                    moves += ((j - 1) / i) * posibilities[j];
-                }
-                if (moves + i < min){
-                    min = moves + i;
-                    //System.out.println("Min "+min);
-                }
+                for (int p : input)
+                    moves += ((int) Math.ceil(p / (time*1.0))) - 1;
+                best = Math.min(best, moves + time);
             }
-            System.out.println("Case #"+caseNumber+": " + min);
+
+            String s = "Case #"+caseNumber+": " + best;
+            //System.out.println(s);
+
+            return s;
 	}
 }
